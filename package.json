@@ -1,0 +1,33 @@
+{
+    "name": "toaster-2",
+    "version": "0.0.0",
+    "description": "New version of my shiloh discord bot, built from the ground up",
+    "author": "Vitorgus",
+    "license": "MIT",
+    "homepage": "https://github.com/Vitorgus/toaster-2#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vitorgus/toaster-2.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Vitorgus/toaster-2/issues"
+    },
+    "main": "bould/index.js",
+    "engines": {
+        "node": "^12.x"
+    },
+    "dependencies": {
+        "discord.js": "^12.2.0"
+    },
+    "devDependencies": {
+        "eslint": "^7.2.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/index.js",
+        "local": "heroku local",
+        "local:dev": "npm run local -- -e .env.test",
+        "lint": "eslint \"./src/**\"",
+        "lint:fix": "npm run lint -- --fix"
+    }
+}

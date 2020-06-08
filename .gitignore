@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# My custom files
+mock.js
+TODO.txt
+to_add
+old_quotes

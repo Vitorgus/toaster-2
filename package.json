@@ -23,7 +23,7 @@
         "start": "node src/index.js",
         "local": "heroku local",
         "local:dev": "npm run local -- -e .env.test",
-        "lint": "eslint \"./src/**\"",
+        "lint": "eslint src/",
         "lint:fix": "npm run lint -- --fix"
     }
 }

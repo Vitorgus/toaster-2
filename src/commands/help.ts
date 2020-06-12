@@ -5,7 +5,7 @@ const help: Command = {
     description: 'List all of my commands or info about a specific command.',
     aliases: ['commands'],
     usage: '[command name]',
-    cooldown: 5,
+    cooldown: 5000,
     execute: (message, args) => {
         const client = message.client as CustomClient;
         const prefix = client.prefix;

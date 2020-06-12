@@ -9,7 +9,6 @@
     },
     "compileOnSave": true,
     "include": [
-        "./src/**/*",
-        ".eslintrc.js"
+        "./src/**/*"
     ]
 }

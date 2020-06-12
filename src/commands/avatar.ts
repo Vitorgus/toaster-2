@@ -1,4 +1,6 @@
-module.exports = {
+import { Command } from '../custom-client';
+
+const avatar: Command = {
     name: 'avatar',
     aliases: ['icon', 'pfp'],
     description: 'Displays users avatars',
@@ -14,3 +16,5 @@ module.exports = {
         message.channel.send(avatarList);
     },
 };
+
+module.exports = avatar;

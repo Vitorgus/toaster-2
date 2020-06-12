@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./build",
+        "allowJs": true,
+        "removeComments": true,
+        "lib": ["ES2019"],
+        "target": "es2019",
+        "module": "commonjs"
+    },
+    "compileOnSave": true,
+    "include": [
+        "./src/**/*",
+        ".eslintrc.js"
+    ]
+}

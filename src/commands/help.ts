@@ -1,17 +1,20 @@
-module.exports = {
+import CustomClient, { Command } from '../custom-client';
+
+const help: Command = {
     name: 'help',
     description: 'List all of my commands or info about a specific command.',
     aliases: ['commands'],
     usage: '[command name]',
     cooldown: 5,
     execute: (message, args) => {
-        const prefix = message.client.prefix;
+        const client = message.client as CustomClient;
+        const prefix = client.prefix;
         const data = [];
-        const { commands, getCommand } = message.client;
+        // const { commands, getCommand } = client;
 
         if (!args.length) {
             data.push('Here\'s a list of all my commands:');
-            data.push(commands.map(command => command.name).join(', '));
+            data.push(client.commands.map(command => command.name).join(', '));
             data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
             return message.author.send(data, { split: true })
@@ -26,7 +29,7 @@ module.exports = {
         }
 
         const name = args[0].toLowerCase();
-        const command = getCommand(name);
+        const command = client.getCommand(name);
 
         if (!command) {
             return message.reply('that\'s not a valid command!');
@@ -44,3 +47,5 @@ module.exports = {
 
     },
 };
+
+module.exports = help;

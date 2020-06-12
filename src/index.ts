@@ -1,25 +1,10 @@
-const Discord = require('discord.js');
-const fs = require('fs');
+import { Collection } from 'discord.js';
 
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
-client.prefix = 'jarvis ';
-client.getCommand = commandName => {
-    return client.commands.get(commandName)
-	|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-};
+import CustomClient from './custom-client';
 
-const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));
+const client = new CustomClient();
 
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-
-    // set a new item in the Collection
-    // with the key as the command name and the value as the exported module
-    client.commands.set(command.name, command);
-}
-
-const cooldowns = new Discord.Collection();
+const cooldowns = new Collection<string, Collection<string, number>>();
 
 client.once('ready', () => {
     console.log('Ready!');
@@ -38,7 +23,8 @@ client.on('message', message => {
     if (!command) return;
 
     if (command.guildOnly && message.channel.type !== 'text') {
-        return message.reply('I can\'t execute that command inside DMs!');
+        message.reply('I can\'t execute that command inside DMs!');
+        return;
     }
 
     if (command.args && !args.length) {
@@ -46,11 +32,12 @@ client.on('message', message => {
         if (command.usage) {
             reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
         }
-        return message.channel.send(reply);
+        message.channel.send(reply);
+        return;
     }
 
     if (!cooldowns.has(command.name)) {
-        cooldowns.set(command.name, new Discord.Collection());
+        cooldowns.set(command.name, new Collection());
     }
 
     const now = Date.now();
@@ -62,7 +49,8 @@ client.on('message', message => {
 
         if (now < expirationTime) {
             const timeLeft = (expirationTime - now) / 1000;
-            return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+            message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+            return;
         }
     }
 

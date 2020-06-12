@@ -1,4 +1,6 @@
-module.exports = {
+import { Command } from '../custom-client';
+
+const kick: Command = {
     name: 'kick',
     description: 'Info about kicking a player',
     guildOnly: true,
@@ -10,3 +12,5 @@ module.exports = {
         message.channel.send(`You wanted to kick: ${taggedUser.username}`);
     },
 };
+
+module.exports = kick;

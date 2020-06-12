@@ -103,6 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+# TS build directory
+build/
+
 # My custom files
 mock.js
 TODO.txt

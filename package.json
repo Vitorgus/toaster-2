@@ -8,7 +8,7 @@
         "type": "git",
         "url": "git+https://github.com/Vitorgus/toaster-2.git"
     },
-    "main": "bould/index.js",
+    "main": "build/index.js",
     "engines": {
         "node": "^12.x"
     },

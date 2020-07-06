@@ -1,12 +1,12 @@
 {
-    "name": "toaster-framework",
+    "name": "toaster-2",
     "version": "0.0.0",
     "description": "New version of my shiloh discord bot, built from the ground up",
     "author": "Vitorgus",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Vitorgus/toaster-framework.git"
+        "url": "git+https://github.com/Vitorgus/toaster-2.git"
     },
     "main": "bould/index.js",
     "engines": {

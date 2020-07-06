@@ -1,4 +1,4 @@
-import CustomClient, { Command } from '../custom-client';
+import CustomClient, { Command } from '../../custom-client';
 
 const reload: Command = {
     name: 'reload',

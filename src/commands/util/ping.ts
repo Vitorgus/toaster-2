@@ -1,4 +1,4 @@
-import { Command } from '../custom-client';
+import { Command } from '../../custom-client';
 
 const ping: Command = {
     name: 'ping',

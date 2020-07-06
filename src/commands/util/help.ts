@@ -1,4 +1,4 @@
-import CustomClient, { Command } from '../custom-client';
+import CustomClient, { Command } from '../../custom-client';
 
 const help: Command = {
     name: 'help',

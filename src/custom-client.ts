@@ -1,5 +1,6 @@
 import { Client, Collection, Message } from 'discord.js';
 import fs = require('fs');
+import path = require("path")
 
 export interface Command {
     name: string;
@@ -15,35 +16,36 @@ export interface Command {
 export default class CustomClient extends Client {
     constructor(options = {}) {
         super(options);
+    }
 
-        const commandDir = fs.readdirSync('./build/commands', { withFileTypes: true });
+    registerCommands(dirPath: string) {
+        const pathDir = path.join(__dirname, dirPath);
 
-        const commandFiles = commandDir.filter(file => file.isFile() && file.name.endsWith('.js'));
+        const commandDir = fs.readdirSync(pathDir, { withFileTypes: true });
 
-        const commandFolders = commandDir.filter(folder => folder.isDirectory());
+        const commandSubDirs = commandDir.filter(dir => dir.isDirectory());
 
-        for (const file of commandFiles) {
-            const command = require(`./commands/${file.name}`) as Command;
+        const dirList = [
+            pathDir,
+            ...commandSubDirs.map(dir => path.join(pathDir, dir.name))
+        ];
 
-            // set a new item in the Collection
-            // with the key as the command name and the value as the exported module
-            this.commands.set(command.name, command);
-        }
+        // console.log(dirList);
 
-        for (const folder of commandFolders) {
-            const dir = fs.readdirSync(`./build/commands/${folder.name}`, { withFileTypes: true });
+        for (const dir of dirList) {
+            const readDir = fs.readdirSync(dir, { withFileTypes: true });
 
-            const files = dir.filter(file => file.isFile() && file.name.endsWith('.js'));
+            const files = readDir.filter(file => file.isFile() && file.name.endsWith('.js'));
 
             for (const file of files) {
-                const command = require(`./commands/${folder.name}/${file.name}`) as Command;
+                const command = require(`${dir}/${file.name}`) as Command;
 
-                // same as the previous loop
+                // set a new item in the Collection
+                // with the key as the command name and the value as the exported module
                 this.commands.set(command.name, command);
             }
         }
     }
-
 
     commands = new Collection<string, Command>();
 

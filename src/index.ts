@@ -67,4 +67,6 @@ client.on('message', message => {
 
 });
 
+client.registerCommands('commands');
+
 client.login(process.env.TOKEN_DISCORD_LOGIN);
